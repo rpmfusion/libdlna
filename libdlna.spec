@@ -1,7 +1,7 @@
 Version: 0.2.3
 Summary: Open-source implementation of DLNA (Digital Living Network Alliance) standards
 Name: libdlna
-Release: 5%{?dist}
+Release: 6%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://libdlna.geexbox.org/
@@ -28,6 +28,13 @@ the libdlna libraries.
 %prep
 %setup -q
 %patch0 -p1
+# adjust includes for the header move in latest ffmpeg <sigh>
+sed -i -e 's|ffmpeg/avcodec.h|ffmpeg/libavcodec/avcodec.h|g' \
+  -e 's|ffmpeg/avformat.h|ffmpeg/libavformat/avformat.h|g' \
+  -e 's|postproc/postprocess.h|ffmpeg/libpostproc/postprocess.h|g' \
+  -e 's|ffmpeg/swscale.h|ffmpeg/libswscale/swscale.h|g' \
+  ext/ffmpeg/*.c ext/ffmpeg/*.h ext/libpostproc/*.c
+
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS"
@@ -57,6 +64,9 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sun Aug 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.2.3-6
+- rebuild
+
 * Sun Feb 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.2.3-5
 - rebuild for new ffmpeg
 
