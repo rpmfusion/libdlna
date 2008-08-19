@@ -1,7 +1,7 @@
 Version: 0.2.3
 Summary: Open-source implementation of DLNA (Digital Living Network Alliance) standards
 Name: libdlna
-Release: 6%{?dist}
+Release: 5%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://libdlna.geexbox.org/
@@ -57,9 +57,6 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
-* Sun Aug 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.2.3-6
-- rebuild
-
 * Sun Feb 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.2.3-5
 - rebuild for new ffmpeg
 
