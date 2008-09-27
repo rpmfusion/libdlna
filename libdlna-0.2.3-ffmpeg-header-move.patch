@@ -1,0 +1,65 @@
+diff -up libdlna-0.2.3/configure~ libdlna-0.2.3/configure
+--- libdlna-0.2.3/configure~	2008-09-27 21:08:58.000000000 +0200
++++ libdlna-0.2.3/configure	2008-09-27 21:08:58.000000000 +0200
+@@ -610,9 +610,9 @@ if [ -n "$ffmpegdir" ]; then
+ fi
+ 
+ echolog "Checking for libavformat ..."
+-check_lib ffmpeg/avformat.h av_register_all -lavformat || die "Error, can't find libavformat !"
++check_lib ffmpeg/libavformat/avformat.h av_register_all -lavformat || die "Error, can't find libavformat !"
+ echolog "Checking for libavcodec ..."
+-check_lib ffmpeg/avcodec.h avcodec_register_all -lavcodec || die "Error, can't find libavcodec !"
++check_lib ffmpeg/libavcodec/avcodec.h avcodec_register_all -lavcodec || die "Error, can't find libavcodec !"
+ 
+ #################################################
+ #   version
+diff -up libdlna-0.2.3/src/av_mpeg4_part10.c~ libdlna-0.2.3/src/av_mpeg4_part10.c
+--- libdlna-0.2.3/src/av_mpeg4_part10.c~	2008-09-27 21:38:31.000000000 +0200
++++ libdlna-0.2.3/src/av_mpeg4_part10.c	2008-09-27 21:38:31.000000000 +0200
+@@ -26,7 +26,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ 
+-#include <ffmpeg/avcodec.h>
++#include <ffmpeg/libavcodec/avcodec.h>
+ 
+ #include "dlna_internals.h"
+ #include "profiles.h"
+diff -up libdlna-0.2.3/src/av_mpeg4_part2.c~ libdlna-0.2.3/src/av_mpeg4_part2.c
+--- libdlna-0.2.3/src/av_mpeg4_part2.c~	2008-09-27 21:38:17.000000000 +0200
++++ libdlna-0.2.3/src/av_mpeg4_part2.c	2008-09-27 21:38:17.000000000 +0200
+@@ -26,7 +26,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ 
+-#include <ffmpeg/avcodec.h>
++#include <ffmpeg/libavcodec/avcodec.h>
+ 
+ #include "dlna_internals.h"
+ #include "profiles.h"
+diff -up libdlna-0.2.3/src/containers.c~ libdlna-0.2.3/src/containers.c
+--- libdlna-0.2.3/src/containers.c~	2008-09-27 21:38:40.000000000 +0200
++++ libdlna-0.2.3/src/containers.c	2008-09-27 21:38:40.000000000 +0200
+@@ -4,7 +4,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ 
+-#include <ffmpeg/avformat.h>
++#include <ffmpeg/libavformat/avformat.h>
+ 
+ #include "containers.h"
+ #include "profiles.h"
+diff -up libdlna-0.2.3/src/profiles.h~ libdlna-0.2.3/src/profiles.h
+--- libdlna-0.2.3/src/profiles.h~	2008-09-27 21:38:42.000000000 +0200
++++ libdlna-0.2.3/src/profiles.h	2008-09-27 21:38:42.000000000 +0200
+@@ -22,8 +22,8 @@
+ #ifndef _PROFILES_H_
+ #define _PROFILES_H_
+ 
+-#include <ffmpeg/avcodec.h>
+-#include <ffmpeg/avformat.h>
++#include <ffmpeg/libavcodec/avcodec.h>
++#include <ffmpeg/libavformat/avformat.h>
+ 
+ #include "dlna_internals.h"
+ #include "containers.h"
