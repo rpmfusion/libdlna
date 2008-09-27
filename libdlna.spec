@@ -1,12 +1,13 @@
 Version: 0.2.3
 Summary: Open-source implementation of DLNA (Digital Living Network Alliance) standards
 Name: libdlna
-Release: 6%{?dist}
+Release: 8%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://libdlna.geexbox.org/
 Source: http://libdlna.geexbox.org/releases/%{name}-%{version}.tar.bz2
 Patch0: libdlna-pkgconfig.patch
+Patch1: libdlna-0.2.3-ffmpeg-header-move.patch
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires: ffmpeg-devel
 
@@ -28,9 +29,10 @@ the libdlna libraries.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
-export CFLAGS="$RPM_OPT_FLAGS"
+export CFLAGS="$RPM_OPT_FLAGS -I/usr/include/ffmpeg"
 ./configure --prefix=%{_prefix} --libdir=%{_libdir} --includedir=%{_includedir} --disable-static
 make
 
@@ -57,7 +59,13 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
-* Tue Aug 26 2008 Eric Tanguy <eric.tanguy@univ-nantes.fr> - 0.2.3-6
+* Sat Sep 27 2008 Hans de Goede <j.w.r.degoede@hhs.nl> 0.2.3-8
+- Fix build with even newer ffmpeg
+
+* Tue Aug 19 2008 Eric Tanguy <eric.tanguy@univ-nantes.fr> - 0.2.3-7
+- Fix build with new ffmpeg
+
+* Sun Aug 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 0.2.3-6
 - rebuild
 
 * Sun Feb 03 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.2.3-5
