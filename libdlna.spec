@@ -1,7 +1,7 @@
 Version: 0.2.3
 Summary: Open-source implementation of DLNA (Digital Living Network Alliance) standards
 Name: libdlna
-Release: 9%{?dist}
+Release: 10%{?dist}
 License: LGPLv2+
 Group: System Environment/Libraries
 URL: http://libdlna.geexbox.org/
@@ -59,6 +59,9 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 rm -rf $RPM_BUILD_ROOT
 
 %changelog
+* Sat Dec 20 2008 Dominik Mierzejewski <rpm@greysector.net> 0.2.3-10
+- rebuild against new ffmpeg
+
 * Sat Sep 27 2008 Dominik Mierzejewski <rpm@greysector.net> 0.2.3-9
 - use proper ffmpeg #include convention
 - use pkg-config to get ffmpeg include and libs paths
